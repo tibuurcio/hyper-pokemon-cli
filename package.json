@@ -1,6 +1,6 @@
 {
   "name": "hyper-pokemon-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "🌈👾 cli to choose your hyper-pokemon theme from your terminal",
   "license": "MIT",
   "author": "Gabriel Tibúrcio <tibuurcio@gmail.com>",
