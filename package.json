@@ -1,0 +1,46 @@
+{
+  "name": "hyper-pokemon-cli",
+  "version": "1.0.0",
+  "description": "🌈👾 cli to choose your hyper-pokemon theme from your terminal",
+  "license": "MIT",
+  "author": "Gabriel Tibúrcio <tibuurcio@gmail.com>",
+  "bin": {
+    "hyper-pokemon": "cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "cli.js",
+    "hyper-pokemon-cli.js"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
+  "repository": "tibuurcio/hyper-pokemon-cli",
+  "keywords": [
+    "cli",
+    "pokemon",
+    "hyper",
+    "theme",
+    "hyper-theme",
+    "pokemon-theme",
+    "terminal",
+    "oh-my-zsh",
+    "hyper-pokemon",
+    "nintendo",
+    "pikachu",
+    "bash",
+    "zsh"
+  ],
+  "bugs": {
+    "url": "https://github.com/tibuurcio/hyper-pokemon-cli/issues"
+  },
+  "homepage": "https://github.com/tibuurcio/hyper-pokemon-cli#readme",
+  "dependencies": {
+    "chalk": "^2.0.1",
+    "home-dir": "^1.0.0",
+    "inquirer": "^3.1.1",
+    "meow": "^3.7.0"
+  }
+}
