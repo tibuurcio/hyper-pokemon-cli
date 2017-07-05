@@ -4,6 +4,8 @@ Choose your [hyper-pokemon](https://github.com/hyper-pokemon/hyper-pokemon) them
 
 ![hyper-pokemon-cli gif](https://media.giphy.com/media/l1K9Dzs2MS5i4rvpe/giphy.gif)
 
+To get the exact same look as the gif, follow the instructions on [hyper-pokemon usage page](https://github.com/hyper-pokemon/hyper-pokemon#usage).
+
 ## Install
 ```
 npm install -g hyper-pokemon-cli
