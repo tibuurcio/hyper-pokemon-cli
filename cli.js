@@ -12,7 +12,11 @@ const cli = meow(`
       --random, -r Set random pokemon
 
     Examples
-      $ hyper-pokemon set
+      $ hyper-pokemon
+      Select from the list of available pokemon themes
+
+      $ hyper-pokemon --random
+      Set a random theme from the list of available themes
 `, {
   alias: {
     r: 'random'

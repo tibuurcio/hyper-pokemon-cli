@@ -1,14 +1,11 @@
 {
   "name": "hyper-pokemon-cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "🌈👾 cli to choose your hyper-pokemon theme from your terminal",
   "license": "MIT",
   "author": "Gabriel Tibúrcio <tibuurcio@gmail.com>",
   "bin": {
     "hyper-pokemon": "cli.js"
-  },
-  "scripts": {
-    "test": ""
   },
   "files": [
     "cli.js",
@@ -41,6 +38,7 @@
     "chalk": "^2.0.1",
     "home-dir": "^1.0.0",
     "inquirer": "^3.1.1",
-    "meow": "^3.7.0"
+    "meow": "^3.7.0",
+    "random-item": "1.0.0"
   }
 }

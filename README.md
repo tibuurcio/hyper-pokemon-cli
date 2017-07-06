@@ -13,7 +13,18 @@ npm install -g hyper-pokemon-cli
 
 ## Usage
 ```
-$ hyper-pokemon
+Usage
+    $ hyper-pokemon <input>
+
+    Options
+      --random, -r Set random pokemon
+
+    Examples
+      $ hyper-pokemon
+      Select from the list of available pokemon themes
+
+      $ hyper-pokemon --random
+      Set a random theme from the list of available themes
 ```
 ## License
 MIT © Gabriel Tibúrcio

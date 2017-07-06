@@ -2,6 +2,7 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const chalk = require("chalk");
 const homeDir = require("home-dir");
+const randomItem = require("random-item");
 const log = console.log;
 
 const hyperConfig = require(homeDir("/.hyper.js"));
@@ -43,11 +44,44 @@ const listOfQuestions = availablePokemon => {
 
 const hyperPokemon = (inputs, flags) => {
   if (flags.random) {
-    // setPokemonToBe(getRandomPokemon());
+    const currentPokemon = hyperConfig.config.pokemon;
+    getAvailablePokemon()
+      .then(files => {
+        const availablePokemon = files.map(file => file.replace(".png", ""));
+        const index = availablePokemon.indexOf(currentPokemon);
+        if (index !== -1) {
+          availablePokemon.splice(index, 1);
+        }
+        setPokemonToBe(randomItem(availablePokemon));
+      });
   } else {
     askForPokemon();
   }
 };
+
+function setPokemonToBe(pokemon, color, unibody) {
+  hyperConfig.config.pokemon = pokemon;
+  hyperConfig.config.color = color ? color : 'dark';
+  hyperConfig.config.unibody = unibody ? !(unibody === "n") : false;
+
+  const json = JSON.stringify(hyperConfig, null, "  ").replace(
+    /\"([^(\")"]+)\":/g,
+    "$1:"
+  );
+
+  const fileContent = `module.exports = ${json};`;
+  fs.writeFile(homeDir("/.hyper.js"), fileContent, "utf8", err => {
+    if (err) throw err;
+    log(
+      `${chalk.green(
+        "Success!"
+      )} Your hyper-pokemon theme was changed to ${chalk.bold(
+        color ? color : 'dark' + " " + pokemon
+      )}
+      Reload your terminal to see the changes!`
+    );
+  });
+}
 
 function askForPokemon() {
   getAvailablePokemon()
@@ -57,27 +91,7 @@ function askForPokemon() {
     })
     .then(answers => {
       const { pokemon, color, unibody } = answers;
-      hyperConfig.config.pokemon = pokemon;
-      hyperConfig.config.pokemonSyntax = color;
-      hyperConfig.config.unibody = !(unibody === "n");
-
-      const json = JSON.stringify(hyperConfig, null, "  ").replace(
-        /\"([^(\")"]+)\":/g,
-        "$1:"
-      );
-      const fileContent = `module.exports = ${json};`;
-
-      fs.writeFile(homeDir("/.hyper.js"), fileContent, "utf8", err => {
-        if (err) throw err;
-        log(
-          `${chalk.green(
-            "Success!"
-          )} Your hyper-pokemon theme was changed to ${chalk.cyan(
-            color + " " + pokemon
-          )}
-          Reload your terminal to see the changes!`
-        );
-      });
+      setPokemonToBe(pokemon, color, unibody);
     });
 }
 
