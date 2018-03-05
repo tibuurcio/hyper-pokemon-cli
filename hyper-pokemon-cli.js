@@ -47,8 +47,7 @@ const hyperPokemon = (inputs, flags) => {
   if (flags.random) {
     const currentPokemon = hyperConfig.config.pokemon;
     getAvailablePokemon()
-      .then(data => {
-        const availablePokemon = Object.keys(yaml.safeLoad(data).pokemon);
+      .then(availablePokemon => {
         const index = availablePokemon.indexOf(currentPokemon);
         if (index !== -1) {
           availablePokemon.splice(index, 1);
@@ -86,8 +85,7 @@ function setPokemonToBe(pokemon, color, unibody) {
 
 function askForPokemon() {
   getAvailablePokemon()
-    .then(data => {
-      const availablePokemon = Object.keys(yaml.safeLoad(data).pokemon);
+    .then(availablePokemon => {
       return inquirer.prompt(listOfQuestions(availablePokemon));
     })
     .then(answers => {
@@ -100,7 +98,7 @@ const getAvailablePokemon = () => {
   return new Promise((resolve, reject) => {
     fs.readFile(pokemonDir + "/pokemon.yml", "utf-8", (err, data) => {
       if (err) reject(err);
-      else resolve(data);
+      else resolve(Object.keys(yaml.safeLoad(data).pokemon));
     });
   });
 };
