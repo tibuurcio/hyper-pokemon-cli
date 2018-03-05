@@ -3,11 +3,12 @@ const inquirer = require("inquirer");
 const chalk = require("chalk");
 const homeDir = require("home-dir");
 const randomItem = require("random-item");
+const yaml = require("js-yaml");
 const log = console.log;
 
 const hyperConfig = require(homeDir("/.hyper.js"));
-const backgroundsFolder = homeDir(
-  "/.hyper_plugins/node_modules/hyper-pokemon/backgrounds/"
+const pokemonDir = homeDir(
+  "/.hyper_plugins/node_modules/hyper-pokemon/"
 );
 
 if (!hyperConfig.plugins.includes("hyper-pokemon")) {
@@ -46,8 +47,8 @@ const hyperPokemon = (inputs, flags) => {
   if (flags.random) {
     const currentPokemon = hyperConfig.config.pokemon;
     getAvailablePokemon()
-      .then(files => {
-        const availablePokemon = files.map(file => file.replace(".png", ""));
+      .then(data => {
+        const availablePokemon = Object.keys(yaml.safeLoad(data).pokemon);
         const index = availablePokemon.indexOf(currentPokemon);
         if (index !== -1) {
           availablePokemon.splice(index, 1);
@@ -85,8 +86,8 @@ function setPokemonToBe(pokemon, color, unibody) {
 
 function askForPokemon() {
   getAvailablePokemon()
-    .then(files => {
-      const availablePokemon = files.map(file => file.replace(".png", ""));
+    .then(data => {
+      const availablePokemon = Object.keys(yaml.safeLoad(data).pokemon);
       return inquirer.prompt(listOfQuestions(availablePokemon));
     })
     .then(answers => {
@@ -97,9 +98,9 @@ function askForPokemon() {
 
 const getAvailablePokemon = () => {
   return new Promise((resolve, reject) => {
-    fs.readdir(backgroundsFolder, (err, files) => {
+    fs.readFile(pokemonDir + "/pokemon.yml", "utf-8", (err, data) => {
       if (err) reject(err);
-      else resolve(files);
+      else resolve(data);
     });
   });
 };
